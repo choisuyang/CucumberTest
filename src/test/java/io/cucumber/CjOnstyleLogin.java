@@ -5,19 +5,32 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+class CheckLogoutText {
+    static String logoutText(String text) {
+        System.out.println("Input text: " + text.trim());  // 디버깅용 출력
+
+        if (text != null && text.trim().equals("로그아웃")) {
+            return "logout";
+        } else {
+            return "login";
+        }
+    }
+}
 
 public class CjOnstyleLogin {
     public static WebDriver driver;
     public static final String WEB_DRIVER_ID = "webdriver.chrome.driver"; // 드라이버 ID
-    public static final String WEB_DRIVER_PATH = "D:\\chromedriver\\chromedriver-win64_130\\chromedriver.exe"; // 드라이버 경로
+//    public static final String WEB_DRIVER_PATH = "D:\\chromedriver\\chromedriver-win64_130\\chromedriver.exe"; // 드라이버 경로
+    public static final String WEB_DRIVER_PATH = "/Users/choesuyang/Documents/chromedriver-mac-x64/chromedriver";
 
-    @Before
     public void setUp() throws Exception {
         System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
 
@@ -32,33 +45,62 @@ public class CjOnstyleLogin {
         driver.get("https://display.cjonstyle.com/p/homeTab/main?hmtabMenuId=H00005");
         Thread.sleep(5000);
 
-    }
-    @Test
-    public void assertTitle() {
+        WebElement loginBtn = driver.findElement(By.className("_loginBtn"));
+        loginBtn.click();
+        Thread.sleep(3000);
 
-        String title = driver.getTitle();
-        Assertions.assertEquals(title,"홈 | CJ온스타일");
+        // 아이디 입력
+        WebElement inputId = driver.findElement(By.id("id_input"));
+        inputId.sendKeys("chltndid724");
+
+        // 비밀번호 입력
+        WebElement inputPw = driver.findElement(By.id("password_input"));
+        inputPw.sendKeys("cjmall2$$");
+
+
+
     }
+
+    public void clickLoginButton() throws Exception{
+        // 로그인 버튼 클릭
+        WebElement clickLoginBtn = driver.findElement(By.id("loginSubmit"));
+        clickLoginBtn.click();
+        Thread.sleep(5000);
+    }
+
+//    @Test
+//    public void assertTitle() {
+//
+//        String title = driver.getTitle();
+//        Assertions.assertEquals(title,"홈 | CJ온스타일");
+//    }
 
 
     @Given("Input text ID and PW")
-    public void input_text_id_and_pw() {
+    public void input_text_id_and_pw() throws Exception {
+        setUp();
         System.out.println("11");
     }
 
     @When("Click Login Button")
-    public void click_login_button(){
+    public void click_login_button() throws Exception {
+        clickLoginButton();
+
         System.out.println("222");
     }
 
     @Then("Move home page and check text {string}")
-    public void move_home_page_and_check_text(String result){
-        System.out.println("33" + result);
-    }
+    public void move_home_page_and_check_text(String text) throws Exception {
+        WebElement getText = driver.findElement(By.xpath("//*[@id=\"header\"]/div/div[1]/div[3]/ul/li[1]/a"));
 
-
-    @After
-    public void close (){
+        String logoutText = CheckLogoutText.logoutText(getText.getText());
+        System.out.println("sldafjl;sdf"+logoutText);
+        assertEquals(text,logoutText);
+        System.out.println("33" + text);
+        Thread.sleep(3000);
         driver.quit();
     }
+
+
+
 }
