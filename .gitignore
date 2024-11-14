@@ -159,7 +159,9 @@ buildNumber.properties
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
 
+test/resources/webconfig.properties
+
+CucumberTest/src/test/resources/webconfig.properties
+
 # End of https://www.toptal.com/developers/gitignore/api/java,intellij,maven
 
-test/resources/
-.webconfig.properites
