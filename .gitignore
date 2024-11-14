@@ -159,6 +159,7 @@ buildNumber.properties
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
 test/resources/
+src/test/resources/webconfig.properties
 
 test/resources/webconfig.properties
 
