@@ -1,6 +1,7 @@
 package io.cucumber;
 
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.After;
 import org.junit.Before;
@@ -9,6 +10,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+
+import java.util.List;
 
 public class Schedule {
     public static WebDriver driver;
@@ -27,7 +30,9 @@ public class Schedule {
         driver.get(url);
         //https://display.cjonstyle.com/p/homeTab/main?hmtabMenuId=H00005
         Thread.sleep(5000);
+
     }
+
 
     @After
     public void close () {
@@ -35,16 +40,38 @@ public class Schedule {
         driver.quit();
     }
 
+
     @Given("Login Setup")
     public void login_setup()throws Exception {
+        setUp();
         loginModule();
         clickLoginButton();
+
     }
 
     @When("Schedule Enter Page")
     public void schedule_enter_page() throws Exception {
+        clickScheduleButton();
+    }
+
+    @Then("Count Live Schedule and Enter Detail Page")
+    public void count_live_schedule_and_enter_detil_page() throws Exception {
+        countSchedule();
+    }
+
+    public void countSchedule() throws Exception {
+        String schedule_itme = "//ul[@class=\"list_schedule_prod\"]/li/a[1][contains(@spcid, 'HOME____live__majitem')]";
+        List<WebElement> item = driver.findElements(By.xpath(schedule_itme));
+        System.out.println("--- > " + item.size());
+
+        for(WebElement itemValue : item) {
+            System.out.println("itemvalue === " + itemValue);
+
+        }
 
     }
+
+
 
     public void loginModule() throws Exception {
         // id,pw 변수 설정
@@ -71,6 +98,14 @@ public class Schedule {
         clickLoginBtn.click();
         Thread.sleep(5000);
     }
+
+    public void clickScheduleButton() throws Exception{
+        WebElement clickScheduleBtn = driver.findElement(By.xpath("//*[@id=\"header\"]/div/div[1]/div[5]/div/ul/li[1]/a"));
+        clickScheduleBtn.click();
+        System.out.println("clickScheduleBtn");
+    }
+
+
 }
 
 

@@ -5,3 +5,4 @@ Feature: Is it login success?
     Given Input text ID and PW
     When Click Login Button
     Then Move home page and check text "logout"
+

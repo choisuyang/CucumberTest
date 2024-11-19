@@ -4,4 +4,4 @@ Feature: Check Live Schedule
   Scenario: Check Live Schedule Success
     Given Login Setup
     When Schedule Enter Page
-    Then Enter Schedule Page
+    Then Count Live Schedule and Enter Detail Page
