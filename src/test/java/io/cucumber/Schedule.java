@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
 
@@ -18,6 +19,8 @@ public class Schedule {
     // config 파일 설정 값 설정 (id,pw,homeurl)
     ConfigManager config = ConfigManager.getInstance();
     String url = config.getProperty("homeurl");
+    private Actions actions;
+
 
     @Before
     public void setUp() throws Exception {
@@ -44,8 +47,8 @@ public class Schedule {
     @Given("Login Setup")
     public void login_setup()throws Exception {
         setUp();
-        loginModule();
-        clickLoginButton();
+//        loginModule();
+//        clickLoginButton();
 
     }
 
@@ -64,14 +67,21 @@ public class Schedule {
         List<WebElement> item = driver.findElements(By.xpath(schedule_itme));
         System.out.println("--- > " + item.size());
 
-        for(WebElement itemValue : item) {
-            System.out.println("itemvalue === " + itemValue);
-
+        String list_name = "//strong[@class=\"tit_prod\"]/a/span";
+        List<WebElement> list_title = driver.findElements(By.xpath(list_name));
+        for(WebElement title : list_title) {
+            System.out.println("제목 : " + title.getText());
         }
 
+        actions = new Actions(driver);
+        Thread.sleep(3000);
+        actions.moveToElement(item.get(0)).perform();
+        Thread.sleep(3000);
+
+        actions.click(item.get(0)).perform();
+
+        close();
     }
-
-
 
     public void loginModule() throws Exception {
         // id,pw 변수 설정
