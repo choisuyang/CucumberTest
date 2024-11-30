@@ -1,7 +1,9 @@
-Feature: Check Live Schedule
-  Check Schedule
+@Abc
+Feature: Check Live Schedule Check Schedule
 
   Scenario: Check Live Schedule Success
-    Given Login Setup
-    When Schedule Enter Page
-    Then Count Live Schedule and Enter Detail Page
+    Given Login setup
+    And Enter the schedule page
+    And Count live schedule and enter detail page
+    When Click option and click purchase button
+    Then Enter the purchase page
