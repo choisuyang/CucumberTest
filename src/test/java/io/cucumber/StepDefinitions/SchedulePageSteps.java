@@ -26,7 +26,7 @@ public class SchedulePageSteps {
     @Before("@Abc")
     public void setUp () {
         driver = new ChromeDriver(webDriverConfig.getChromeOptions());
-        driver.get(webDriverConfig.getDriverUrl());
+        driver.get("https://display.cjonstyle.com");
 
         loginPage = new LoginPage(driver);
         schedulePage = new SchedulePage(driver);
@@ -41,7 +41,6 @@ public class SchedulePageSteps {
 
     @Given("Login setup")
     public void login_setup () throws Exception {
-        setUp();
         Thread.sleep(3000);
         loginPage.loginModule();
     }
@@ -65,7 +64,6 @@ public class SchedulePageSteps {
     public void enter_the_purchase_page() throws Exception {
         purchasePage.btnChangePaymentWithDeposit();
         System.out.println("end");
-        close();
     }
 
 }

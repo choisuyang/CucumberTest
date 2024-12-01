@@ -16,6 +16,12 @@ public class ProductPage {
 
     @FindBy(xpath = "//div[@class='prd_info_wrap']/div/div/a[contains(@class,'_buy')]")
     public WebElement buyButton;
+    @FindBy(xpath = "//div[@class=\"prd_content_wrap\"]/div[contains(@class,'option_wrap')]/div/div/div/a")
+    public WebElement firstOption;
+    @FindBy(xpath = "//ul[@class='option_list']/li[3]/a")
+    public WebElement firstOptionItem;
+    @FindBy(xpath = "//ul[@class='option_list']/li/a")
+    public WebElement secondOptionItem;
 
     public ProductPage(WebDriver driver) {
 
@@ -27,6 +33,18 @@ public class ProductPage {
 
     public void clickOptionAndClickPurchaseButton() throws Exception {
         buyButton.click();
+        Thread.sleep(3000);
+    }
+
+    public void clickFirstOption() throws Exception {
+        firstOption.click();
+        Thread.sleep(3000);
+        if (firstOptionItem.getText().contains("매진")){
+            secondOptionItem.click();
+        } else {
+            firstOptionItem.click();
+        }
+        Thread.sleep(3000);
     }
 
 }
