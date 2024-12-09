@@ -41,9 +41,9 @@ public class TheAtGPageSteps {
         loginPage.loginModule();
     }
 
-    @When("Input item number in search module")
-    public void input_item_number_in_search_module() throws Exception{
-        homePage.searchInput();
+    @When("Input item {string} in search module")
+    public void input_item_number_in_search_module(String code) throws Exception{
+        homePage.searchInput(code);
     }
 
     @And("Click first item and enter the detail page")

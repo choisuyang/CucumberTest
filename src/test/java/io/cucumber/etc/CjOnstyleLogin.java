@@ -17,7 +17,6 @@
 //public class CjOnstyleLogin {
 //    public static WebDriver driver;
 ////    public static final String WEB_DRIVER_ID = "webdriver.chrome.driver"; // 드라이버 ID
-////    public static final String WEB_DRIVER_PATH = "D:\\chromedriver\\chromedriver-win64_130\\chromedriver.exe"; // 드라이버 경로
 ////    public static final String WEB_DRIVER_PATH = "/Users/choesuyang/Documents/chromedriver-mac-x64/chromedriver";
 //    @Before
 //    public void setUp() throws Exception {

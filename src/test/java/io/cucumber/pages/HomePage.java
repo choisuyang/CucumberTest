@@ -29,9 +29,9 @@ public class HomePage {
         wait = new WebDriverWait(this.driver, Duration.ofSeconds(10));
     }
 
-    public void searchInput() throws Exception {
+    public void searchInput(String code) throws Exception {
         Thread.sleep(3000);
-        searchInput.sendKeys("2035051761");
+        searchInput.sendKeys(code);
         searchButton.click();
         Thread.sleep(3000);
     }

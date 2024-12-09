@@ -18,7 +18,7 @@ public class ProductPage {
     public WebElement buyButton;
     @FindBy(xpath = "//div[@class=\"prd_content_wrap\"]/div[contains(@class,'option_wrap')]/div/div/div/a")
     public WebElement firstOption;
-    @FindBy(xpath = "//ul[@class='option_list']/li[3]/a")
+    @FindBy(xpath = "//ul[@class='option_list']/li[4]/a")
     public WebElement firstOptionItem;
     @FindBy(xpath = "//ul[@class='option_list']/li/a")
     public WebElement secondOptionItem;
